@@ -1,0 +1,31 @@
+# Виртуальное окружение
+.venv312/
+
+# Временные файлы Jupyter Notebook
+_pycache/
+*py[cod]
+.ipynb_checkpoints/
+
+# кэшированные файлы
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+#Данные и модели
+data/raw/*
+data/processed/*
+models/*
+
+#локальные результаты mlflow
+mlruns/
+mlartifacts/
+mlflow.db
+mlflow.db-*
+
+# Логи
+logs/
+*.log
+.env
+
