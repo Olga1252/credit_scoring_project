@@ -6,15 +6,19 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 
 def build_pipeline(numeric_features, categorical_features):
-    numeric_pipeline = Pipeline(steps=[
-        ("imputer", SimpleImputer(strategy="median")),
-        ("scaler", StandardScaler()),
-    ])
+    numeric_pipeline = Pipeline(
+        steps=[
+            ("imputer", SimpleImputer(strategy="median")),
+            ("scaler", StandardScaler()),
+        ]
+    )
 
-    categorical_pipeline = Pipeline(steps=[
-        ("imputer", SimpleImputer(strategy="most_frequent")),
-        ("onehot", OneHotEncoder(handle_unknown="ignore")),
-    ])
+    categorical_pipeline = Pipeline(
+        steps=[
+            ("imputer", SimpleImputer(strategy="most_frequent")),
+            ("onehot", OneHotEncoder(handle_unknown="ignore")),
+        ]
+    )
 
     preprocessor = ColumnTransformer(
         transformers=[
@@ -23,14 +27,17 @@ def build_pipeline(numeric_features, categorical_features):
         ]
     )
 
-    model = Pipeline(steps=[
-        ("preprocessor", preprocessor),
-        ("classifier", LogisticRegression(
-            max_iter=1000,
-            random_state=42,
-        )),
-    ])
+    model = Pipeline(
+        steps=[
+            ("preprocessor", preprocessor),
+            (
+                "classifier",
+                LogisticRegression(
+                    max_iter=1000,
+                    random_state=42,
+                ),
+            ),
+        ]
+    )
 
     return model
-
-
