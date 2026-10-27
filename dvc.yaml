@@ -1,0 +1,21 @@
+stages:
+  prepare:
+    cmd: python -m src.data.make_dataset
+    deps:
+     - data/raw/UCI_Credit_Card.csv
+     - src/data/make_dataset.py
+     - src/data/validation.py 
+    outs: 
+      - data/processed/train_data.csv
+      - data/processed/test_data.csv
+
+  train:
+    cmd: python -m src.models.train
+    deps:
+      - data/processed/train_data.csv
+      - data/processed/test_data.csv
+      - src/features/build_features.py
+      - src/models/pipeline.py
+      - src/models/train.py
+    outs:
+      - models/trained/model.joblib
